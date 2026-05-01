@@ -783,6 +783,53 @@
     transform: translateY(0);
   }
 
+  /* ── DODATAK ZA DATUM I VREME ── */
+  .form-row {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .form-row .form-group {
+    flex: 1;
+  }
+
+  .form-group select {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--gold-muted);
+    padding: 0.75rem 0;
+    font-family: 'Jost', sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--text-main);
+    outline: none;
+    transition: border-color 0.3s;
+    appearance: none;
+    cursor: pointer;
+  }
+
+  .form-group select:focus {
+    border-bottom-color: var(--gold);
+  }
+
+  .form-group select option {
+    background: var(--bg-alt);
+    color: var(--text-main);
+  }
+
+  /* Prilagođavanje ikonice kalendara za tamnu temu */
+  .form-group input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.8) sepia(0.5) saturate(3) hue-rotate(350deg);
+    cursor: pointer;
+  }
+
+  @media (max-width: 600px) {
+    .form-row {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  }
+
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
     nav { padding: 1.5rem 2rem; }
@@ -1037,25 +1084,44 @@
       <p class="section-label reveal">Pišite nam</p>
       <h2 class="section-title reveal" style="font-size:2.5rem">Vaša<br><em>poruka</em></h2>
       <div class="gold-line reveal"></div>
-
       <form class="contact-form reveal" onsubmit="handleSubmit(event)">
         <div class="form-group">
           <label>Ime i prezime</label>
-          <input type="text" placeholder="Ana Jovanović">
+          <input type="text" placeholder="Ana Jovanović" required>
         </div>
         <div class="form-group">
           <label>Telefon ili email</label>
-          <input type="text" placeholder="060 123 4567">
+          <input type="text" placeholder="060 123 4567" required>
         </div>
         <div class="form-group">
           <label>Usluga koja vas zanima</label>
-          <input type="text" placeholder="npr. bojenje, šišanje...">
+          <input type="text" placeholder="npr. bojenje, šišanje..." required>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Datum</label>
+            <input type="date" required>
+          </div>
+          <div class="form-group">
+            <label>Vreme</label>
+            <select required>
+              <option value="" disabled selected>Izaberite termin</option>
+              <option value="09:00">09:00</option>
+              <option value="10:30">10:30</option>
+              <option value="12:00">12:00</option>
+              <option value="14:00">14:00</option>
+              <option value="15:30">15:30</option>
+              <option value="17:00">17:00</option>
+              <option value="18:30">18:30</option>
+            </select>
+          </div>
         </div>
         <div class="form-group">
-          <label>Poruka</label>
-          <textarea rows="3" placeholder="Vaša poruka ili željeni termin..."></textarea>
+          <label>Dodatna poruka</label>
+          <textarea rows="2" placeholder="Vaša poruka (opciono)..."></textarea>
         </div>
-        <button type="submit" class="form-submit">Pošaljite poruku</button>
+        <button type="submit" class="form-submit">Zakažite termin</button>
       </form>
     </div>
   </div>
